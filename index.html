@@ -1,0 +1,1295 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title data-i18n="title">Nil Boix – Portfolio</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    html {
+      scroll-behavior: smooth;
+    }
+
+    /* Konami code success */
+    .konami-active {
+      animation: rainbow 2s linear infinite;
+    }
+
+    @keyframes rainbow {
+      0% { filter: hue-rotate(0deg); }
+      100% { filter: hue-rotate(360deg); }
+    }
+
+    /* Dropdown Menu */
+    .nav-dropdown {
+      position: relative;
+    }
+
+    .nav-dropdown::after {
+      content: '';
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: 100%;
+      height: 0.5rem;
+      background: transparent;
+    }
+
+    .dropdown {
+      position: absolute;
+      right: 0; /* Align language dropdown to the right */
+      left: auto;
+      top: 100%;
+      margin-top: 0.5rem;
+      background: white;
+      border-radius: 0.75rem;
+      box-shadow: 0 10px 40px rgba(0,0,0,0.15);
+      overflow: hidden;
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(-10px);
+      transition: opacity 0.3s cubic-bezier(0.4, 0, 0.2, 1), 
+                  transform 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+                  visibility 0s linear 0.3s;
+      min-width: 12rem;
+      z-index: 1000;
+    }
+
+    .nav-dropdown:hover .dropdown {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
+      transition: opacity 0.3s cubic-bezier(0.4, 0, 0.2, 1), 
+                  transform 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+                  visibility 0s linear 0s;
+    }
+
+    .dropdown a, .dropdown button {
+      display: block;
+      width: 100%;
+      text-align: left;
+      padding: 0.75rem 1.25rem;
+      color: #1f2937;
+      text-decoration: none;
+      font-size: 0.95rem;
+      transition: all 0.2s;
+      border-left: 3px solid transparent;
+      cursor: pointer;
+      background: none;
+      border: none;
+    }
+
+    .dropdown a:hover, .dropdown button:hover {
+      background: linear-gradient(90deg, rgba(6,182,212,0.1) 0%, transparent 100%);
+      color: #06b6d4;
+      border-left-color: #06b6d4;
+      padding-left: 1.5rem;
+    }
+
+    .dark .dropdown {
+      background: #1f2937;
+      box-shadow: 0 10px 40px rgba(0,0,0,0.5);
+    }
+
+    .dark .dropdown a, .dark .dropdown button {
+      color: #e5e7eb;
+    }
+
+    .dark .dropdown a:hover, .dark .dropdown button:hover {
+      background: linear-gradient(90deg, rgba(6,182,212,0.15) 0%, transparent 100%);
+      color: #06b6d4;
+    }
+
+    /* Parallax effect */
+    .parallax-layer {
+      transition: transform 0.3s ease-out;
+    }
+
+    /* Animations */
+    @keyframes fade-in {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes fade-in-scale {
+      from { opacity: 0; transform: scale(0.95); }
+      to { opacity: 1; transform: scale(1); }
+    }
+
+    @keyframes glow-pulse {
+      0%, 100% { box-shadow: 0 0 20px rgba(6,182,212,0.5); }
+      50% { box-shadow: 0 0 40px rgba(6,182,212,0.8); }
+    }
+
+    .animate-fade-in {
+      animation: fade-in 0.8s ease forwards;
+    }
+
+    .animate-fade-in-delayed {
+      animation: fade-in 1s ease 0.3s forwards;
+      opacity: 0;
+    }
+
+    .animate-fade-in-scale {
+      animation: fade-in-scale 0.6s ease forwards;
+    }
+
+    /* Floating Bubbles */
+    .bubble {
+      position: absolute;
+      border-radius: 9999px;
+      opacity: 0.15;
+      pointer-events: none;
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: white;
+      padding: 0.5rem 1rem;
+      white-space: nowrap;
+      animation: float linear infinite;
+      backdrop-filter: blur(2px);
+    }
+
+    @keyframes float {
+      from { transform: translateY(100vh) rotate(0deg); }
+      to { transform: translateY(-10vh) rotate(360deg); }
+    }
+
+    /* Gradient text with animation */
+    .gradient-text {
+      background: linear-gradient(135deg, #06b6d4 0%, #a855f7 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      background-size: 200% 200%;
+      animation: gradient-shift 3s ease infinite;
+    }
+
+    @keyframes gradient-shift {
+      0%, 100% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+    }
+
+    /* Card hover with 3D tilt */
+    .card-hover {
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      transform-style: preserve-3d;
+    }
+
+    .card-hover:hover {
+      transform: translateY(-8px) rotateX(2deg);
+      box-shadow: 0 20px 40px rgba(6,182,212,0.3);
+    }
+
+    /* Skill badge */
+    .skill-badge {
+      transition: all 0.2s;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .skill-badge::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+      transition: left 0.5s;
+    }
+
+    .skill-badge:hover::before {
+      left: 100%;
+    }
+
+    .skill-badge:hover {
+      transform: scale(1.1);
+      box-shadow: 0 4px 15px rgba(6,182,212,0.4);
+    }
+
+    /* Section reveal */
+    .section-reveal {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: all 0.8s ease;
+    }
+
+    .section-reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Glass morphism */
+    .glass {
+      background: rgba(255, 255, 255, 0.7);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+    }
+
+    .dark .glass {
+      background: rgba(31, 41, 55, 0.7);
+    }
+
+    /* Timeline */
+    .timeline-item {
+      position: relative;
+      padding-left: 2rem;
+      margin-bottom: 2rem;
+    }
+
+    .timeline-item::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0.5rem;
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #06b6d4, #a855f7);
+      box-shadow: 0 0 0 4px rgba(6,182,212,0.2);
+      animation: pulse-dot 2s ease-in-out infinite;
+    }
+
+    @keyframes pulse-dot {
+      0%, 100% { transform: scale(1); box-shadow: 0 0 0 4px rgba(6,182,212,0.2); }
+      50% { transform: scale(1.1); box-shadow: 0 0 0 8px rgba(6,182,212,0.1); }
+    }
+
+    .timeline-item::after {
+      content: '';
+      position: absolute;
+      left: 5px;
+      top: 1.5rem;
+      width: 2px;
+      height: calc(100% + 1rem);
+      background: linear-gradient(180deg, rgba(6,182,212,0.5), transparent);
+    }
+
+    .timeline-item:last-child::after {
+      display: none;
+    }
+
+    /* Typing effect */
+    .typing-text::after {
+      content: '|';
+      animation: blink 1s step-end infinite;
+    }
+
+    @keyframes blink {
+      50% { opacity: 0; }
+    }
+
+    /* Particle effect (UPDATED KEYFRAMES) */
+    .particle {
+      position: fixed;
+      pointer-events: none;
+      border-radius: 50%;
+      animation: particle-float 1s ease-out forwards;
+      z-index: 9999;
+    }
+
+    @keyframes particle-float {
+      from { 
+        transform: translate(0, 0) scale(1); 
+        opacity: 1; 
+      }
+      to {
+        /* Use the custom properties set in JS for dynamic movement */
+        transform: translate(var(--translate-x), var(--translate-y)) scale(0);
+        opacity: 0;
+      }
+    }
+
+    /* Secret mode indicator */
+    #secret-mode {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background: linear-gradient(135deg, #06b6d4, #a855f7);
+      color: white;
+      padding: 1rem 1.5rem;
+      border-radius: 2rem;
+      font-weight: bold;
+      transform: translateY(200px);
+      transition: transform 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+      z-index: 10000;
+      box-shadow: 0 10px 30px rgba(6,182,212,0.5);
+      animation: glow-pulse 2s ease-in-out infinite;
+    }
+
+    #secret-mode.active {
+      transform: translateY(0);
+    }
+
+    /* Matrix rain easter egg */
+    #matrix-canvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 1;
+      opacity: 0;
+      transition: opacity 1s;
+    }
+
+    #matrix-canvas.active {
+      opacity: 0.1;
+    }
+
+    /* Language Button Customization */
+    .nav-dropdown.language-switcher .dropdown {
+        left: auto; /* Override standard dropdown positioning */
+        right: 0;
+        min-width: 8rem;
+    }
+  </style>
+</head>
+<link rel="stylesheet" href="https://js-dos.com/6.22/current/js-dos.css" />
+<body class="font-sans bg-gray-50 text-gray-900 dark:bg-gray-900 dark:text-gray-100">
+  <audio id="hadouken-sound" src="https://www.myinstants.com/media/sounds/hadouken.mp3" preload="auto"></audio>
+  
+  <canvas id="matrix-canvas"></canvas>
+
+  <div id="secret-mode">Secret Mode Activated!</div>
+
+  <header class="fixed top-0 left-0 right-0 glass shadow-lg z-50">
+    <nav class="max-w-6xl mx-auto flex justify-between items-center py-4 px-6">
+      <h1 class="text-2xl font-bold gradient-text cursor-pointer hover:scale-105 transition" onclick="easterEgg1()">Nil Boix</h1>
+
+      <ul class="flex gap-4 md:gap-8 items-center">
+        <li class="nav-dropdown">
+          <button class="hover:text-cyan-500 font-medium transition cursor-pointer" data-i18n="nav-about">About</button>
+          <div class="dropdown">
+            <a href="#about" data-i18n="nav-profile">Profile</a>
+            <a href="#education" data-i18n="nav-education">Education</a>
+          </div>
+        </li>
+
+        <li class="nav-dropdown">
+          <button class="hover:text-cyan-500 font-medium transition cursor-pointer" data-i18n="nav-experience">Experience</button>
+          <div class="dropdown">
+            <a href="#airtificial" data-i18n="nav-airtificial">Airtificial</a>
+            <a href="#projects" data-i18n="nav-projects">Projects</a>
+          </div>
+        </li>
+
+        <li class="nav-dropdown">
+          <button class="hover:text-cyan-500 font-medium transition cursor-pointer" data-i18n="nav-other-exp">Other Experience</button>
+          <div class="dropdown">
+            <a href="#other-exp">MoMa New School</a>
+            <a href="#other-exp">Món Sant Benet</a>
+          </div>
+        </li>
+
+        <li><a href="#skills" class="hover:text-cyan-500 font-medium transition" data-i18n="nav-skills">Skills</a></li>
+        <li><a href="#contact" class="hover:text-cyan-500 font-medium transition" data-i18n="nav-contact">Contact</a></li>
+        
+        <li class="nav-dropdown language-switcher">
+            <button id="lang-button" class="flex items-center gap-1 hover:text-cyan-500 font-medium transition cursor-pointer">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-5 h-5">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 21l-3.375-3.375M12 2.25v2.25M12 18v2.25M15.375 21L18.75 17.625M18.75 6.375L15.375 9.75M4.875 3L8.25 6.375M19.125 3L15.75 6.375M12 10.5a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0z" />
+                </svg>
+                <span id="current-lang-code">EN</span>
+            </button>
+            <div class="dropdown">
+                <button onclick="setLanguage('en')">English</button>
+                <button onclick="setLanguage('es')">Español</button>
+                <button onclick="setLanguage('ca')">Català</button>
+            </div>
+        </li>
+      </ul>
+    </nav>
+  </header>
+
+  <section id="hero" class="min-h-screen flex flex-col justify-center items-center text-center px-6 pt-24 relative overflow-hidden parallax-layer">
+    <div class="absolute inset-0 bg-gradient-to-br from-cyan-500/10 via-transparent to-purple-500/10"></div>
+
+    <h2 class="text-5xl md:text-7xl font-extrabold mb-4 relative z-10 gradient-text animate-fade-in" data-i18n="hero-title">
+      ICT Engineer & Developer
+    </h2>
+    <p class="text-lg md:text-xl max-w-2xl mb-8 text-gray-600 dark:text-gray-300 relative z-10 animate-fade-in-delayed" data-i18n="hero-subtitle">
+      Building bridges between <span class="text-cyan-500 font-semibold" data-i18n="hero-span1">hardware</span> and <span class="text-purple-500 font-semibold" data-i18n="hero-span2">intelligence</span>.  
+      Focused on automation, data systems, and creative problem-solving.
+    </p>
+    <div class="flex gap-4 relative z-10 animate-fade-in-scale" style="animation-delay: 0.6s; opacity: 0;">
+      <a href="#contact" class="bg-gradient-to-r from-cyan-500 to-cyan-600 text-white px-8 py-3 rounded-full hover:shadow-2xl hover:scale-105 transition font-medium" data-i18n="hero-contact-btn">Contact Me</a>
+      <a href="/CVNilBoix.pdf" class="border-2 border-cyan-500 text-cyan-500 px-8 py-3 rounded-full hover:bg-cyan-500 hover:text-white transition font-medium" data-i18n="hero-cv-btn">Download CV</a>
+    </div>
+
+    <div id="bubble-container" class="absolute inset-0 -z-0"></div>
+
+    <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce">
+      <svg class="w-6 h-6 text-cyan-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
+      </svg>
+    </div>
+  </section>
+
+  <section id="about" class="max-w-6xl mx-auto py-24 px-6 section-reveal">
+    <div class="glass rounded-2xl p-8 md:p-12 shadow-xl">
+      <h3 class="text-4xl font-bold mb-6 gradient-text" data-i18n="about-title">About Me</h3>
+      <p class="max-w-3xl text-lg leading-relaxed text-gray-700 dark:text-gray-300 mb-4" data-i18n="about-p1">
+        As an ICT Systems Engineer, I bring a multidisciplinary background in software development, electronics, and communications. I have hands-on experience in front-end and back-end development, industrial automation, and embedded systems. Recently, I've started applying self-taught machine learning and AI techniques to internal projects at work.
+      </p>
+      <p class="max-w-3xl text-lg leading-relaxed text-gray-700 dark:text-gray-300" data-i18n="about-p2">
+        I'm especially interested in how large engineering teams build scalable, intelligent systems to solve real-world problems with AI. My goal is to keep improving, learn from experienced developers, and grow into a strong contributor in the software field.
+      </p>
+      
+      <div class="grid md:grid-cols-3 gap-6 mt-12">
+        <div class="card-hover bg-white dark:bg-gray-800 p-6 rounded-xl shadow-lg border border-gray-100 dark:border-gray-700">
+          <div class="text-4xl mb-4">💻</div>
+          <h4 class="font-bold text-xl mb-2 text-cyan-500" data-i18n="about-card1-title">Full-Stack Dev</h4>
+          <p class="text-gray-600 dark:text-gray-400" data-i18n="about-card1-desc">Building scalable applications with modern frameworks and databases</p>
+        </div>
+        
+        <div class="card-hover bg-white dark:bg-gray-800 p-6 rounded-xl shadow-lg border border-gray-100 dark:border-gray-700">
+          <div class="text-4xl mb-4">⚙️</div>
+          <h4 class="font-bold text-xl mb-2 text-purple-500" data-i18n="about-card2-title">Automation</h4>
+          <p class="text-gray-600 dark:text-gray-400" data-i18n="about-card2-desc">Industrial systems, PLC programming, and real-time monitoring</p>
+        </div>
+        
+        <div class="card-hover bg-white dark:bg-gray-800 p-6 rounded-xl shadow-lg border border-gray-100 dark:border-gray-700" onclick="activateMatrixMode()">
+          <div class="text-4xl mb-4">🤖</div>
+          <h4 class="font-bold text-xl mb-2 text-cyan-500" data-i18n="about-card3-title">AI & Data</h4>
+          <p class="text-gray-600 dark:text-gray-400" data-i18n="about-card3-desc">Machine learning, NLP, and data processing automation</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="education" class="max-w-6xl mx-auto py-24 px-6 section-reveal">
+    <h3 class="text-4xl font-bold mb-12 gradient-text" data-i18n="edu-title">Education</h3>
+    <div class="glass rounded-2xl p-8 md:p-12 shadow-xl">
+      <div class="flex items-start gap-6">
+        <div class="text-5xl">🎓</div>
+        <div class="flex-1">
+          <div class="flex justify-between items-start flex-wrap gap-2 mb-2">
+            <h4 class="text-2xl font-bold text-cyan-500" data-i18n="edu-degree">Information and Communication Technologies Engineering</h4>
+            <span class="text-purple-500 font-semibold" data-i18n="edu-years">2020 - 2025</span>
+          </div>
+          <p class="text-xl text-gray-600 dark:text-gray-400 mb-2" data-i18n="edu-university">Universitat Politècnica de Catalunya (UPC)</p>
+          <p class="text-gray-600 dark:text-gray-400 leading-relaxed" data-i18n="edu-desc">
+            Comprehensive degree covering software development, electronics, communications, and systems engineering. Focused on industrial automation, embedded systems, and data processing.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="airtificial" class="max-w-6xl mx-auto py-24 px-6 section-reveal">
+    <h3 class="text-4xl font-bold mb-12 gradient-text" data-i18n="exp-title">Professional Experience</h3>
+    <div class="glass rounded-2xl p-8 md:p-12 shadow-xl">
+      <div class="flex justify-between items-start flex-wrap gap-4 mb-6">
+        <div>
+          <h4 class="text-3xl font-bold text-cyan-500 mb-2" data-i18n="exp-role">Software Engineer</h4>
+          <p class="text-xl text-gray-600 dark:text-gray-400" data-i18n="exp-company">Airtificial Intelligent Robots S.L.</p>
+          <p class="text-sm text-gray-500 dark:text-gray-500" data-i18n="exp-dept">Software Engineering Department</p>
+        </div>
+        <span class="text-purple-500 font-semibold text-lg" data-i18n="exp-years">2024 - Present</span>
+      </div>
+
+      <div class="space-y-4 mb-8">
+        <div class="timeline-item">
+          <h5 class="font-bold text-lg mb-2 text-gray-800 dark:text-gray-200" data-i18n="exp-item1-title">Full-Stack Development</h5>
+          <p class="text-gray-600 dark:text-gray-400" data-i18n="exp-item1-desc">Developed full-stack features for an internal assembly line traceability system, improving data visibility across departments.</p>
+        </div>
+
+        <div class="timeline-item">
+          <h5 class="font-bold text-lg mb-2 text-gray-800 dark:text-gray-200" data-i18n="exp-item2-title">Backend Migration</h5>
+          <p class="text-gray-600 dark:text-gray-400" data-i18n="exp-item2-desc">Took part in a backend migration project, helping move a legacy system from Java to Python, ensuring compatibility and improved maintainability.</p>
+        </div>
+
+        <div class="timeline-item">
+          <h5 class="font-bold text-lg mb-2 text-gray-800 dark:text-gray-200" data-i18n="exp-item3-title">PLC Monitoring Application</h5>
+          <p class="text-gray-600 dark:text-gray-400" data-i18n="exp-item3-desc">Currently contributing to the development of a PLC monitoring application using C# and Windows Forms, integrating machine data into a real-time UI.</p>
+        </div>
+
+        <div class="timeline-item">
+          <h5 class="font-bold text-lg mb-2 text-gray-800 dark:text-gray-200" data-i18n="exp-item4-title">Data Automation & NLP</h5>
+          <p class="text-gray-600 dark:text-gray-400" data-i18n="exp-item4-desc">Built an internal data cleaning and NLP automation tool to restructure human-generated Excel data using NLTK, saving days of manual cleanup.</p>
+        </div>
+
+        <div class="timeline-item">
+          <h5 class="font-bold text-lg mb-2 text-gray-800 dark:text-gray-200" data-i18n="exp-item5-title">LabVIEW & Data Acquisition</h5>
+          <p class="text-gray-600 dark:text-gray-400" data-i18n="exp-item5-desc">Worked with LabVIEW for graphical programming and machine data acquisition, enabling real-time monitoring from factory equipment.</p>
+        </div>
+      </div>
+
+      <div class="bg-cyan-50 dark:bg-gray-800 rounded-xl p-6 border-l-4 border-cyan-500">
+        <p class="text-sm text-gray-600 dark:text-gray-400 mb-2" data-i18n="exp-ref-label">🔧 Reference:</p>
+        <p class="font-bold text-gray-800 dark:text-gray-200" data-i18n="exp-ref-name">Alexis Abrutsky - Head of Software Engineering</p>
+        <p class="text-gray-600 dark:text-gray-400" data-i18n="exp-ref-contact">alexis.abrutsky@airtificial.com | +34 938 78 97 60</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="projects" class="max-w-6xl mx-auto py-24 px-6 section-reveal">
+    <h3 class="text-4xl font-bold mb-12 gradient-text" data-i18n="proj-title">Featured Project</h3>
+    <div class="glass rounded-2xl p-8 md:p-12 shadow-xl">
+      <div class="flex items-start gap-6">
+        
+        <div class="flex-1">
+          <div class="flex justify-between items-start flex-wrap gap-2 mb-4">
+            <h4 class="text-2xl font-bold text-cyan-500" data-i18n="proj-item-title">Internal Excel & NLP Automation Tool</h4>
+            <span class="text-purple-500 font-semibold" data-i18n="proj-item-year">2025</span>
+          </div>
+          <p class="text-lg text-gray-600 dark:text-gray-400 mb-4" data-i18n="proj-item-company">Airtificial Intelligent Robots S.L.</p>
+          
+          <div class="space-y-3">
+            <p class="text-gray-700 dark:text-gray-300" data-i18n="proj-item-desc1">
+              • Independently developed a Python tool to clean, restructure, and format human-generated Excel data used in internal processes.
+            </p>
+            <p class="text-gray-700 dark:text-gray-300" data-i18n="proj-item-desc2">
+              • Applied self-taught NLP techniques (NLTK, tokenization, pattern detection, error correction) to automate the detection and handling of inconsistent or ambiguous data.
+            </p>
+            <p class="text-gray-700 dark:text-gray-300" data-i18n="proj-item-desc3">
+              • Designed and implemented the solution from scratch, significantly reducing manual processing time and improving data reliability across departments.
+            </p>
+          </div>
+
+          <div class="flex flex-wrap gap-2 mt-6">
+            <span class="skill-badge bg-cyan-100 text-cyan-700 dark:bg-cyan-900 dark:text-cyan-300 px-3 py-1 rounded-full text-sm font-medium">Python</span>
+            <span class="skill-badge bg-purple-100 text-purple-700 dark:bg-purple-900 dark:text-purple-300 px-3 py-1 rounded-full text-sm font-medium">NLTK</span>
+            <span class="skill-badge bg-cyan-100 text-cyan-700 dark:bg-cyan-900 dark:text-cyan-300 px-3 py-1 rounded-full text-sm font-medium">Pandas</span>
+            <span class="skill-badge bg-purple-100 text-purple-700 dark:bg-purple-900 dark:text-purple-300 px-3 py-1 rounded-full text-sm font-medium">NLP</span>
+            <span class="skill-badge bg-cyan-100 text-cyan-700 dark:bg-cyan-900 dark:text-cyan-300 px-3 py-1 rounded-full text-sm font-medium" data-i18n="proj-skill-data">Data Processing</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="other-exp" class="max-w-6xl mx-auto py-24 px-6 section-reveal">
+    <h3 class="text-4xl font-bold mb-12 gradient-text" data-i18n="other-exp-title">Other Professional Experience</h3>
+    
+    <div class="grid md:grid-cols-2 gap-6">
+      <div class="glass rounded-2xl p-8 shadow-xl card-hover">
+        <div class="flex items-start gap-4 mb-4">
+          <div class="text-4xl">📚</div>
+          <div class="flex-1">
+            <h4 class="text-2xl font-bold text-cyan-500 mb-1" data-i18n="other-exp-item1-role">English FCE Teacher</h4>
+            <p class="text-lg text-gray-600 dark:text-gray-400" data-i18n="other-exp-item1-company">MoMa New School</p>
+            <p class="text-purple-500 font-semibold text-sm" data-i18n="other-exp-item1-years">2020 - 2025</p>
+          </div>
+        </div>
+        <p class="text-gray-700 dark:text-gray-300 mb-6" data-i18n="other-exp-item1-desc">
+          Responsible for training students for the Cambridge First Certificate (B2) exam, with emphasis on practical communication, fluency, and exam readiness.
+        </p>
+        <div class="bg-cyan-50 dark:bg-gray-800 rounded-xl p-4 border-l-4 border-cyan-500">
+          <p class="text-sm text-gray-600 dark:text-gray-400 mb-1" data-i18n="exp-ref-label">🔧 Reference:</p>
+          <p class="font-bold text-gray-800 dark:text-gray-200" data-i18n="other-exp-item1-ref-name">Montse Parera - MoMa CEO</p>
+          <p class="text-gray-600 dark:text-gray-400 text-sm" data-i18n="other-exp-item1-ref-contact">moma@momanewschool.com | +34 937 01 49 20</p>
+        </div>
+      </div>
+
+      <div class="glass rounded-2xl p-8 shadow-xl card-hover">
+        <div class="flex items-start gap-4 mb-4">
+          <div class="text-4xl">🍽️</div>
+          <div class="flex-1">
+            <h4 class="text-2xl font-bold text-purple-500 mb-1" data-i18n="other-exp-item2-role">English Interpreter</h4>
+            <p class="text-lg text-gray-600 dark:text-gray-400" data-i18n="other-exp-item2-company">Món Sant Benet</p>
+            <p class="text-cyan-500 font-semibold text-sm" data-i18n="other-exp-item2-desc-ext">One Michelin Star Restaurant</p>
+            <p class="text-purple-500 font-semibold text-sm" data-i18n="other-exp-item2-years">2020 - Present</p>
+          </div>
+        </div>
+        <p class="text-gray-700 dark:text-gray-300" data-i18n="other-exp-item2-desc">
+          Provide real-time English interpretation during workshops at a Michelin-starred restaurant, helping international guests fully understand and enjoy high-level culinary instruction.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section id="skills" class="max-w-6xl mx-auto py-24 px-6 section-reveal">
+    <h3 class="text-4xl font-bold mb-12 gradient-text text-center" data-i18n="skills-title">Technical Skills</h3>
+    
+    <div class="glass rounded-2xl p-8 md:p-12 shadow-xl mb-8">
+      <h4 class="text-xl font-bold mb-4 text-cyan-500" data-i18n="skills-lang-title">Programming Languages</h4>
+      <div class="flex flex-wrap gap-3">
+        <span class="skill-badge bg-cyan-500 text-white px-5 py-2 rounded-full font-medium shadow-lg">Python</span>
+        <span class="skill-badge bg-purple-500 text-white px-5 py-2 rounded-full font-medium shadow-lg">C/C++</span>
+        <span class="skill-badge bg-cyan-500 text-white px-5 py-2 rounded-full font-medium shadow-lg">JavaScript</span>
+        <span class="skill-badge bg-purple-500 text-white px-5 py-2 rounded-full font-medium shadow-lg">Java</span>
+        <span class="skill-badge bg-cyan-500 text-white px-5 py-2 rounded-full font-medium shadow-lg">C#</span>
+        <span class="skill-badge bg-purple-500 text-white px-5 py-2 rounded-full font-medium shadow-lg">VHDL</span>
+        <span class="skill-badge bg-cyan-500 text-white px-5 py-2 rounded-full font-medium shadow-lg">Erlang</span>
+        <span class="skill-badge bg-purple-500 text-white px-5 py-2 rounded-full font-medium shadow-lg">Assembly</span>
+      </div>
+    </div>
+
+    <div class="glass rounded-2xl p-8 md:p-12 shadow-xl mb-8">
+      <h4 class="text-xl font-bold mb-4 text-purple-500" data-i18n="skills-frameworks-title">Frameworks & Libraries</h4>
+      <div class="flex flex-wrap gap-3">
+        <span class="skill-badge bg-purple-500 text-white px-5 py-2 rounded-full font-medium shadow-lg">Spring Boot</span>
+        <span class="skill-badge bg-cyan-500 text-white px-5 py-2 rounded-full font-medium shadow-lg">.NET Framework</span>
+        <span class="skill-badge bg-purple-500 text-white px-5 py-2 rounded-full font-medium shadow-lg">Windows Forms</span>
+        <span class="skill-badge bg-cyan-500 text-white px-5 py-2 rounded-full font-medium shadow-lg">Angular</span>
+        <span class="skill-badge bg-purple-500 text-white px-5 py-2 rounded-full font-medium shadow-lg">NLTK</span>
+        <span class="skill-badge bg-cyan-500 text-white px-5 py-2 rounded-full font-medium shadow-lg">Pandas</span>
+        <span class="skill-badge bg-purple-500 text-white px-5 py-2 rounded-full font-medium shadow-lg">NumPy</span>
+      </div>
+    </div>
+
+    <div class="glass rounded-2xl p-8 md:p-12 shadow-xl mb-8">
+      <h4 class="text-xl font-bold mb-4 text-cyan-500" data-i18n="skills-tools-title">Technologies & Tools</h4>
+      <div class="flex flex-wrap gap-3">
+        <span class="skill-badge bg-cyan-500 text-white px-5 py-2 rounded-full font-medium shadow-lg">LabVIEW</span>
+        <span class="skill-badge bg-purple-500 text-white px-5 py-2 rounded-full font-medium shadow-lg">PostgreSQL</span>
+        <span class="skill-badge bg-cyan-500 text-white px-5 py-2 rounded-full font-medium shadow-lg">Git</span>
+        <span class="skill-badge bg-purple-500 text-white px-5 py-2 rounded-full font-medium shadow-lg">Linux</span>
+        <span class="skill-badge bg-cyan-500 text-white px-5 py-2 rounded-full font-medium shadow-lg">PLC Programming</span>
+        <span class="skill-badge bg-purple-500 text-white px-5 py-2 rounded-full font-medium shadow-lg">ESP32</span>
+        <span class="skill-badge bg-cyan-500 text-white px-5 py-2 rounded-full font-medium shadow-lg">Arduino</span>
+        <span class="skill-badge bg-purple-500 text-white px-5 py-2 rounded-full font-medium shadow-lg">HTML5</span>
+        <span class="skill-badge bg-cyan-500 text-white px-5 py-2 rounded-full font-medium shadow-lg">JSON</span>
+        <span class="skill-badge bg-purple-500 text-white px-5 py-2 rounded-full font-medium shadow-lg">HTTP</span>
+      </div>
+    </div>
+
+    <div class="glass rounded-2xl p-8 md:p-12 shadow-xl">
+      <h4 class="text-xl font-bold mb-4 text-purple-500" data-i18n="skills-languages-title">Languages</h4>
+      <div class="grid md:grid-cols-3 gap-4">
+        <div class="bg-white dark:bg-gray-800 p-4 rounded-xl border border-purple-200 dark:border-purple-800">
+          <p class="font-bold text-purple-500" data-i18n="lang-english">English</p>
+          <p class="text-sm text-gray-600 dark:text-gray-400" data-i18n="lang-c2">C2 - Proficient</p>
+        </div>
+        <div class="bg-white dark:bg-gray-800 p-4 rounded-xl border border-cyan-200 dark:border-cyan-800">
+          <p class="font-bold text-cyan-500" data-i18n="lang-catalan">Catalan</p>
+          <p class="text-sm text-gray-600 dark:text-gray-400" data-i18n="lang-native">Native</p>
+        </div>
+        <div class="bg-white dark:bg-gray-800 p-4 rounded-xl border border-purple-200 dark:border-purple-800">
+          <p class="font-bold text-purple-500" data-i18n="lang-spanish">Spanish</p>
+          <p class="text-sm text-gray-600 dark:text-gray-400" data-i18n="lang-native">Native</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact" class="max-w-6xl mx-auto py-24 px-6 section-reveal">
+    <h3 class="text-4xl font-bold mb-12 gradient-text text-center" data-i18n="contact-title">Get In Touch</h3>
+    
+    <div class="glass rounded-2xl p-8 md:p-12 shadow-xl max-w-3xl mx-auto">
+      <p class="text-center text-lg text-gray-700 dark:text-gray-300 mb-8" data-i18n="contact-desc">
+        I'm always open to discussing new projects, opportunities, or collaborations. Feel free to reach out!
+      </p>
+      
+      <div class="grid md:grid-cols-2 gap-6">
+        <a href="mailto:nilbl2012@gmail.com" class="card-hover bg-white dark:bg-gray-800 p-6 rounded-xl shadow-lg border border-gray-100 dark:border-gray-700 flex items-center gap-4">
+          <div class="text-4xl">📧</div>
+          <div>
+            <p class="font-bold text-cyan-500 mb-1" data-i18n="contact-email">Email</p>
+            <p class="text-gray-600 dark:text-gray-400 text-sm">nilbl2012@gmail.com</p>
+          </div>
+        </a>
+
+        <a href="tel:+34655690379" class="card-hover bg-white dark:bg-gray-800 p-6 rounded-xl shadow-lg border border-gray-100 dark:border-gray-700 flex items-center gap-4">
+          <div class="text-4xl">📱</div>
+          <div>
+            <p class="font-bold text-purple-500 mb-1" data-i18n="contact-phone">Phone</p>
+            <p class="text-gray-600 dark:text-gray-400 text-sm">+34 655 69 03 79</p>
+          </div>
+        </a>
+
+        <a href="https://www.linkedin.com/in/nil-boix-luna" target="_blank" class="card-hover bg-white dark:bg-gray-800 p-6 rounded-xl shadow-lg border border-gray-100 dark:border-gray-700 flex items-center gap-4">
+          <div class="text-4xl">💼</div>
+          <div>
+            <p class="font-bold text-cyan-500 mb-1">LinkedIn</p>
+            <p class="text-gray-600 dark:text-gray-400 text-sm">Nil Boix Luna</p>
+          </div>
+        </a>
+
+        <a href="https://maps.app.goo.gl/ypMnUDeFSp3GKRer5" target="_blank" class="card-hover bg-white dark:bg-gray-800 p-6 rounded-xl shadow-lg border border-gray-100 dark:border-gray-700 flex items-center gap-4">
+          <div class="text-4xl">📍</div>
+          <div>
+            <p class="font-bold text-purple-500 mb-1" data-i18n="contact-location">Location</p>
+            <p class="text-gray-600 dark:text-gray-400 text-sm" data-i18n="contact-location-details">Manresa, Barcelona, Spain</p>
+          </div>
+        </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="text-center py-8 text-sm border-t border-gray-200 dark:border-gray-700 mt-24">
+    <p class="text-gray-600 dark:text-gray-400">© <span id="year"></span> Nil Boix. <span data-i18n="footer-rights">All rights reserved.</span></p>
+    <p class="text-xs text-gray-400 dark:text-gray-600 mt-2" data-i18n="footer-hint">Try the Konami Code or check the terminal...</p>
+  </footer>
+
+  <script>
+    // --- TRANSLATION DATA ---
+    const translations = {
+        en: {
+            title: "Nil Boix – Portfolio",
+            "nav-about": "About",
+            "nav-profile": "Profile",
+            "nav-education": "Education",
+            "nav-experience": "Experience",
+            "nav-airtificial": "Airtificial",
+            "nav-projects": "Projects",
+            "nav-other-exp": "Other Experience",
+            "nav-skills": "Skills",
+            "nav-contact": "Contact",
+            "hero-title": "ICT Engineer & Developer",
+            "hero-subtitle": "Building bridges between {hero-span1} and {hero-span2}. Focused on automation, data systems, and creative problem-solving.",
+            "hero-span1": "hardware",
+            "hero-span2": "intelligence",
+            "hero-contact-btn": "Contact Me",
+            "hero-cv-btn": "Download CV",
+            "about-title": "About Me",
+            "about-p1": "As an ICT Systems Engineer, I bring a multidisciplinary background in software development, electronics, and communications. I have hands-on experience in front-end and back-end development, industrial automation, and embedded systems. Recently, I've started applying self-taught machine learning and AI techniques to internal projects at work.",
+            "about-p2": "I'm especially interested in how large engineering teams build scalable, intelligent systems to solve real-world problems with AI. My goal is to keep improving, learn from experienced developers, and grow into a strong contributor in the software field.",
+            "about-card1-title": "Full-Stack Dev",
+            "about-card1-desc": "Building scalable applications with modern frameworks and databases",
+            "about-card2-title": "Automation",
+            "about-card2-desc": "Industrial systems, PLC programming, and real-time monitoring",
+            "about-card3-title": "AI & Data",
+            "about-card3-desc": "Machine learning, NLP, and data processing automation",
+            "edu-title": "Education",
+            "edu-degree": "Information and Communication Technologies Engineering",
+            "edu-years": "2020 - 2025",
+            "edu-university": "Universitat Politècnica de Catalunya (UPC)",
+            "edu-desc": "Comprehensive degree covering software development, electronics, communications, and systems engineering. Focused on industrial automation, embedded systems, and data processing.",
+            "exp-title": "Professional Experience",
+            "exp-role": "Software Engineer",
+            "exp-company": "Airtificial Intelligent Robots S.L.",
+            "exp-dept": "Software Engineering Department",
+            "exp-years": "2024 - Present",
+            "exp-item1-title": "Full-Stack Development",
+            "exp-item1-desc": "Developed full-stack features for an internal assembly line traceability system, improving data visibility across departments.",
+            "exp-item2-title": "Backend Migration",
+            "exp-item2-desc": "Took part in a backend migration project, helping move a legacy system from Java to Python, ensuring compatibility and improved maintainability.",
+            "exp-item3-title": "PLC Monitoring Application",
+            "exp-item3-desc": "Currently contributing to the development of a PLC monitoring application using C# and Windows Forms, integrating machine data into a real-time UI.",
+            "exp-item4-title": "Data Automation & NLP",
+            "exp-item4-desc": "Built an internal data cleaning and NLP automation tool to restructure human-generated Excel data using NLTK, saving days of manual cleanup.",
+            "exp-item5-title": "LabVIEW & Data Acquisition",
+            "exp-item5-desc": "Worked with LabVIEW for graphical programming and machine data acquisition, enabling real-time monitoring from factory equipment.",
+            "exp-ref-label": "🔧 Reference:",
+            "exp-ref-name": "Alexis Abrutsky - Head of Software Engineering",
+            "exp-ref-contact": "alexis.abrutsky@airtificial.com | +34 938 78 97 60",
+            "proj-title": "Featured Project",
+            "proj-item-title": "Internal Excel & NLP Automation Tool",
+            "proj-item-year": "2025",
+            "proj-item-company": "Airtificial Intelligent Robots S.L.",
+            "proj-item-desc1": "• Independently developed a Python tool to clean, restructure, and format human-generated Excel data used in internal processes.",
+            "proj-item-desc2": "• Applied self-taught NLP techniques (NLTK, tokenization, pattern detection, error correction) to automate the detection and handling of inconsistent or ambiguous data.",
+            "proj-item-desc3": "• Designed and implemented the solution from scratch, significantly reducing manual processing time and improving data reliability across departments.",
+            "proj-skill-data": "Data Processing",
+            "other-exp-title": "Other Professional Experience",
+            "other-exp-item1-role": "English FCE Teacher",
+            "other-exp-item1-company": "MoMa New School",
+            "other-exp-item1-years": "2020 - 2025",
+            "other-exp-item1-desc": "Responsible for training students for the Cambridge First Certificate (B2) exam, with emphasis on practical communication, fluency, and exam readiness.",
+            "other-exp-item1-ref-name": "Montse Parera - MoMa CEO",
+            "other-exp-item1-ref-contact": "moma@momanewschool.com | +34 937 01 49 20",
+            "other-exp-item2-role": "English Interpreter",
+            "other-exp-item2-company": "Món Sant Benet",
+            "other-exp-item2-desc-ext": "One Michelin Star Restaurant",
+            "other-exp-item2-years": "2020 - Present",
+            "other-exp-item2-desc": "Provide real-time English interpretation during workshops at a Michelin-starred restaurant, helping international guests fully understand and enjoy high-level culinary instruction.",
+            "skills-title": "Technical Skills",
+            "skills-lang-title": "Programming Languages",
+            "skills-frameworks-title": "Frameworks & Libraries",
+            "skills-tools-title": "Technologies & Tools",
+            "skills-languages-title": "Languages",
+            "lang-english": "English",
+            "lang-catalan": "Catalan",
+            "lang-spanish": "Spanish",
+            "lang-c2": "C2 - Proficient",
+            "lang-native": "Native",
+            "contact-title": "Get In Touch",
+            "contact-desc": "I'm always open to discussing new projects, opportunities, or collaborations. Feel free to reach out!",
+            "contact-email": "Email",
+            "contact-phone": "Phone",
+            "contact-location": "Location",
+            "contact-location-details": "Manresa, Barcelona, Spain",
+            "footer-rights": "All rights reserved.",
+            "footer-hint": "Try the Konami Code or check the terminal...",
+            "secret-mode-particle-active": "Hadouken!",
+            "secret-mode-particle-deactive": "Enough!",
+            "secret-mode-rainbow": "Party time!",
+            "secret-mode-flipao": "Flipao!",
+        },
+        es: {
+            title: "Nil Boix – Portafolio",
+            "nav-about": "Sobre Mí",
+            "nav-profile": "Perfil",
+            "nav-education": "Educación",
+            "nav-experience": "Experiencia",
+            "nav-airtificial": "Airtificial",
+            "nav-projects": "Proyectos",
+            "nav-other-exp": "Otra Experiencia",
+            "nav-skills": "Habilidades",
+            "nav-contact": "Contacto",
+            "hero-title": "Ingeniero & Desarrollador TIC",
+            "hero-subtitle": "Construyendo puentes entre {hero-span1} y la {hero-span2}. Centrado en automatización, sistemas de datos y resolución creativa de problemas.",
+            "hero-span1": "ferretería",
+            "hero-span2": "inteligencia",
+            "hero-contact-btn": "Contactar",
+            "hero-cv-btn": "Descargar CV",
+            "about-title": "Sobre Mí",
+            "about-p1": "Como Ingeniero de Sistemas TIC, aporto una formación multidisciplinar en desarrollo de software, electrónica y comunicaciones. Tengo experiencia práctica en desarrollo front-end y back-end, automatización industrial y sistemas embebidos. Recientemente, he empezado a aplicar técnicas autodidactas de machine learning e IA en proyectos internos.",
+            "about-p2": "Estoy especialmente interesado en cómo los grandes equipos de ingeniería construyen sistemas escalables e inteligentes para resolver problemas del mundo real con IA. Mi objetivo es seguir mejorando, aprender de desarrolladores experimentados y crecer como un contribuidor sólido en el campo del software.",
+            "about-card1-title": "Desarrollo Full-Stack",
+            "about-card1-desc": "Construcción de aplicaciones escalables con frameworks y bases de datos modernas",
+            "about-card2-title": "Automatización",
+            "about-card2-desc": "Sistemas industriales, programación PLC y monitorización en tiempo real",
+            "about-card3-title": "IA y Datos",
+            "about-card3-desc": "Aprendizaje automático, PLN y automatización de procesamiento de datos",
+            "edu-title": "Educación",
+            "edu-degree": "Ingeniería en Tecnologías y Servicios de Telecomunicación",
+            "edu-years": "2020 - 2025",
+            "edu-university": "Universitat Politècnica de Catalunya (UPC)",
+            "edu-desc": "Grado integral que abarca desarrollo de software, electrónica, comunicaciones e ingeniería de sistemas. Centrado en automatización industrial, sistemas embebidos y procesamiento de datos.",
+            "exp-title": "Experiencia Profesional",
+            "exp-role": "Ingeniero de Software",
+            "exp-company": "Airtificial Intelligent Robots S.L.",
+            "exp-dept": "Departamento de Ingeniería de Software",
+            "exp-years": "2024 - Actualidad",
+            "exp-item1-title": "Desarrollo Full-Stack",
+            "exp-item1-desc": "Desarrollé funcionalidades full-stack para un sistema interno de trazabilidad de líneas de montaje, mejorando la visibilidad de los datos en todos los departamentos.",
+            "exp-item2-title": "Migración de Backend",
+            "exp-item2-desc": "Participé en un proyecto de migración de backend, ayudando a trasladar un sistema legacy de Java a Python, asegurando la compatibilidad y mejorando la mantenibilidad.",
+            "exp-item3-title": "Aplicación de Monitorización PLC",
+            "exp-item3-desc": "Actualmente contribuyo al desarrollo de una aplicación de monitorización PLC usando C# y Windows Forms, integrando datos de maquinaria en una interfaz de usuario en tiempo real.",
+            "exp-item4-title": "Automatización de Datos y PLN",
+            "exp-item4-desc": "Construí una herramienta interna de automatización de limpieza de datos y PLN para reestructurar datos de Excel generados por humanos usando NLTK, ahorrando días de limpieza manual.",
+            "exp-item5-title": "LabVIEW y Adquisición de Datos",
+            "exp-item5-desc": "Trabajé con LabVIEW para programación gráfica y adquisición de datos de maquinaria, permitiendo la monitorización en tiempo real de equipos de fábrica.",
+            "exp-ref-label": "🔧 Referencia:",
+            "exp-ref-name": "Alexis Abrutsky - Jefe de Ingeniería de Software",
+            "exp-ref-contact": "alexis.abrutsky@airtificial.com | +34 938 78 97 60",
+            "proj-title": "Proyecto Destacado",
+            "proj-item-title": "Herramienta Interna de Automatización de Excel y PLN",
+            "proj-item-year": "2025",
+            "proj-item-company": "Airtificial Intelligent Robots S.L.",
+            "proj-item-desc1": "• Desarrollé de forma independiente una herramienta en Python para limpiar, reestructurar y formatear datos de Excel generados por humanos utilizados en procesos internos.",
+            "proj-item-desc2": "• Apliqué técnicas autodidactas de PLN (NLTK, tokenización, detección de patrones, corrección de errores) para automatizar la detección y el manejo de datos inconsistentes o ambiguos.",
+            "proj-item-desc3": "• Diseñé e implementé la solución desde cero, reduciendo significativamente el tiempo de procesamiento manual y mejorando la fiabilidad de los datos en los departamentos.",
+            "proj-skill-data": "Procesamiento de Datos",
+            "other-exp-title": "Otra Experiencia Profesional",
+            "other-exp-item1-role": "Profesor de Inglés FCE",
+            "other-exp-item1-company": "MoMa New School",
+            "other-exp-item1-years": "2020 - 2025",
+            "other-exp-item1-desc": "Responsable de la formación de estudiantes para el examen Cambridge First Certificate (B2), con énfasis en comunicación práctica, fluidez y preparación para el examen.",
+            "other-exp-item1-ref-name": "Montse Parera - CEO de MoMa",
+            "other-exp-item1-ref-contact": "moma@momanewschool.com | +34 937 01 49 20",
+            "other-exp-item2-role": "Intérprete de Inglés",
+            "other-exp-item2-company": "Món Sant Benet",
+            "other-exp-item2-desc-ext": "Restaurante con una Estrella Michelin",
+            "other-exp-item2-years": "2020 - Actualidad",
+            "other-exp-item2-desc": "Proporcionar interpretación de inglés en tiempo real durante talleres en un restaurante con estrella Michelin, ayudando a los invitados internacionales a comprender y disfrutar plenamente de la instrucción culinaria de alto nivel.",
+            "skills-title": "Habilidades Técnicas",
+            "skills-lang-title": "Lenguajes de Programación",
+            "skills-frameworks-title": "Frameworks y Librerías",
+            "skills-tools-title": "Tecnologías y Herramientas",
+            "skills-languages-title": "Idiomas",
+            "lang-english": "Inglés",
+            "lang-catalan": "Catalán",
+            "lang-spanish": "Español",
+            "lang-c2": "C2 - Competente",
+            "lang-native": "Nativo",
+            "contact-title": "Contacto",
+            "contact-desc": "Siempre estoy abierto a discutir nuevos proyectos, oportunidades o colaboraciones. ¡No dudes en contactarme!",
+            "contact-email": "Correo Electrónico",
+            "contact-phone": "Teléfono",
+            "contact-location": "Ubicación",
+            "contact-location-details": "Manresa, Barcelona, España",
+            "footer-rights": "Todos los derechos reservados.",
+            "footer-hint": "Prueba el Código Konami o revisa la terminal...",
+            "secret-mode-particle-active": "Hadouken!",
+            "secret-mode-particle-deactive": "Ya basta!",
+            "secret-mode-rainbow": "Party time!",
+            "secret-mode-flipao": "¡Flipao!",
+        },
+        ca: {
+            title: "Nil Boix – Portfoli",
+            "nav-about": "Sobre Mi",
+            "nav-profile": "Perfil",
+            "nav-education": "Educació",
+            "nav-experience": "Experiència",
+            "nav-airtificial": "Airtificial",
+            "nav-projects": "Projectes",
+            "nav-other-exp": "Altra Experiència",
+            "nav-skills": "Habilitats",
+            "nav-contact": "Contacte",
+            "hero-title": "Enginyer & Desenvolupador TIC",
+            "hero-subtitle": "Construint ponts entre el {hero-span1} i la {hero-span2}. Centrat en automatització, sistemes de dades i resolució creativa de problemes.",
+            "hero-span1": "ferratge",
+            "hero-span2": "intel·ligència",
+            "hero-contact-btn": "Contacta'm",
+            "hero-cv-btn": "Descarregar CV",
+            "about-title": "Sobre Mi",
+            "about-p1": "Com a Enginyer de Sistemes TIC, aporto una formació multidisciplinària en desenvolupament de software, electrònica i comunicacions. Tinc experiència pràctica en desenvolupament front-end i back-end, automatització industrial i sistemes encastats. Recentment, he començat a aplicar tècniques autodidactes de machine learning i IA en projectes interns.",
+            "about-p2": "Estic especialment interessat en com els grans equips d'enginyeria construeixen sistemes escalables i intel·ligents per resoldre problemes del món real amb IA. El meu objectiu és seguir millorant, aprendre de desenvolupadors experimentats i créixer com un contribuidor sòlid en el camp del software.",
+            "about-card1-title": "Desenvolupament Full-Stack",
+            "about-card1-desc": "Construcció d'aplicacions escalables amb frameworks i bases de dades modernes",
+            "about-card2-title": "Automatització",
+            "about-card2-desc": "Sistemes industrials, programació PLC i monitorització en temps real",
+            "about-card3-title": "IA i Dades",
+            "about-card3-desc": "Aprenentatge automàtic, PLN i automatització de processament de dades",
+            "edu-title": "Educació",
+            "edu-degree": "Enginyeria en Tecnologies i Serveis de Telecomunicació",
+            "edu-years": "2020 - 2025",
+            "edu-university": "Universitat Politècnica de Catalunya (UPC)",
+            "edu-desc": "Grau integral que abasta desenvolupament de software, electrònica, comunicacions i enginyeria de sistemes. Centrat en automatització industrial, sistemes encastats i processament de dades.",
+            "exp-title": "Experiència Professional",
+            "exp-role": "Enginyer de Software",
+            "exp-company": "Airtificial Intelligent Robots S.L.",
+            "exp-dept": "Departament d'Enginyeria de Software",
+            "exp-years": "2024 - Actualitat",
+            "exp-item1-title": "Desenvolupament Full-Stack",
+            "exp-item1-desc": "Vaig desenvolupar funcionalitats full-stack per a un sistema intern de traçabilitat de línies de muntatge, millorant la visibilitat de les dades a tots els departaments.",
+            "exp-item2-title": "Migració de Backend",
+            "exp-item2-desc": "Vaig participar en un projecte de migració de backend, ajudant a traslladar un sistema legacy de Java a Python, assegurant la compatibilitat i millorant la mantenibilitat.",
+            "exp-item3-title": "Aplicació de Monitorització PLC",
+            "exp-item3-desc": "Actualment contribueixo al desenvolupament d'una aplicació de monitorització PLC usant C# i Windows Forms, integrant dades de maquinària en una interfície d'usuari en temps real.",
+            "exp-item4-title": "Automatització de Dades i PLN",
+            "exp-item4-desc": "Vaig construir una eina interna d'automatització de neteja de dades i PLN per reestructurar dades d'Excel generades per humans usant NLTK, estalviant dies de neteja manual.",
+            "exp-item5-title": "LabVIEW i Adquisició de Dades",
+            "exp-item5-desc": "Vaig treballar amb LabVIEW per a programació gràfica i adquisició de dades de maquinària, permetent la monitorització en temps real d'equips de fàbrica.",
+            "exp-ref-label": "🔧 Referència:",
+            "exp-ref-name": "Alexis Abrutsky - Cap d'Enginyeria de Software",
+            "exp-ref-contact": "alexis.abrutsky@airtificial.com | +34 938 78 97 60",
+            "proj-title": "Projecte Destacat",
+            "proj-item-title": "Eina Interna d'Automatització d'Excel i PLN",
+            "proj-item-year": "2025",
+            "proj-item-company": "Airtificial Intelligent Robots S.L.",
+            "proj-item-desc1": "• Vaig desenvolupar de forma independent una eina en Python per netejar, reestructurar i formatar dades d'Excel generades per humans utilitzades en processos interns.",
+            "proj-item-desc2": "• Vaig aplicar tècniques autodidactes de PLN (NLTK, tokenització, detecció de patrons, correcció d'errors) per automatitzar la detecció i el maneig de dades inconsistents o ambigües.",
+            "proj-item-desc3": "• Vaig dissenyar i implementar la solució des de zero, reduint significativament el temps de processament manual i millorant la fiabilitat de les dades als departaments.",
+            "proj-skill-data": "Processament de Dades",
+            "other-exp-title": "Altra Experiència Professional",
+            "other-exp-item1-role": "Professor d'Anglès FCE",
+            "other-exp-item1-company": "MoMa New School",
+            "other-exp-item1-years": "2020 - 2025",
+            "other-exp-item1-desc": "Responsable de la formació d'estudiants per a l'examen Cambridge First Certificate (B2), amb èmfasi en comunicació pràctica, fluïdesa i preparació per a l'examen.",
+            "other-exp-item1-ref-name": "Montse Parera - CEO de MoMa",
+            "other-exp-item1-ref-contact": "moma@momanewschool.com | +34 937 01 49 20",
+            "other-exp-item2-role": "Intèrpret d'Anglès",
+            "other-exp-item2-company": "Món Sant Benet",
+            "other-exp-item2-desc-ext": "Restaurant amb una Estrella Michelin",
+            "other-exp-item2-years": "2020 - Actualitat",
+            "other-exp-item2-desc": "Proporcionar interpretació d'anglès en temps real durant tallers en un restaurant amb estrella Michelin, ajudant els convidats internacionals a comprendre i gaudir plenament de la instrucció culinària d'alt nivell.",
+            "skills-title": "Habilitats Tècniques",
+            "skills-lang-title": "Llenguatges de Programació",
+            "skills-frameworks-title": "Frameworks i Llibreries",
+            "skills-tools-title": "Tecnologies i Eines",
+            "skills-languages-title": "Idiomes",
+            "lang-english": "Anglès",
+            "lang-catalan": "Català",
+            "lang-spanish": "Espanyol",
+            "lang-c2": "C2 - Competent",
+            "lang-native": "Natiu",
+            "contact-title": "Contacte",
+            "contact-desc": "Sempre estic obert a discutir nous projectes, oportunitats o col·laboracions. No dubtis a contactar-me!",
+            "contact-email": "Correu Electrònic",
+            "contact-phone": "Telèfon",
+            "contact-location": "Ubicació",
+            "contact-location-details": "Manresa, Barcelona, Espanya",
+            "footer-rights": "Tots els drets reservats.",
+            "footer-hint": "Prova el Codi Konami o revisa la terminal...",
+            "secret-mode-particle-active": "Hadouken!",
+            "secret-mode-particle-deactive": "Ja prou!",
+            "secret-mode-rainbow": "Party time!",
+            "secret-mode-flipao": "Flipao!",
+        }
+    };
+
+    let currentLang = localStorage.getItem('portfolioLang') || 'en';
+
+    // Function to update all text content based on the active language
+    function updateContent() {
+        const lang = currentLang;
+        const t = translations[lang];
+
+        // Update elements using data-i18n attribute
+        document.querySelectorAll('[data-i18n]').forEach(element => {
+            const key = element.getAttribute('data-i18n');
+            let text = t[key];
+
+            if (text) {
+                // Handle complex strings with embedded spans (like hero-subtitle)
+                const matches = text.match(/\{(.+?)\}/g);
+                if (matches) {
+                    matches.forEach(match => {
+                        const subKey = match.slice(1, -1);
+                        const subText = t[subKey] || subKey;
+                        // Replace the placeholder with an equivalent span structure
+                        text = text.replace(match, `<span class="${element.querySelector(`[data-i18n="${subKey}"]`)?.className || ''}">${subText}</span>`);
+                    });
+                    element.innerHTML = text;
+                } else {
+                    element.textContent = text;
+                }
+            }
+        });
+
+        // Update Title tag (special case as it's not innerHTML/textContent)
+        document.title = t['title'];
+
+        // Update the language button text
+        document.getElementById('current-lang-code').textContent = lang.toUpperCase();
+    }
+
+    // Function to set the new language and update the page
+    function setLanguage(lang) {
+        currentLang = lang;
+        localStorage.setItem('portfolioLang', lang);
+        updateContent();
+    }
+
+    // --- INITIALIZATION ---
+    window.onload = function() {
+        // Apply saved or default language on load
+        updateContent();
+        
+        // --- Remaining Initialization (kept from previous version) ---
+
+        // Footer year
+        document.getElementById("year").textContent = new Date().getFullYear();
+
+        // Parallax effect
+        document.addEventListener('mousemove', (e) => {
+          const layers = document.querySelectorAll('.parallax-layer');
+          const mouseX = e.clientX / window.innerWidth;
+          const mouseY = e.clientY / window.innerHeight;
+          
+          layers.forEach((layer, index) => {
+            const speed = (index + 1) * 5;
+            const x = (mouseX - 0.5) * speed;
+            const y = (mouseY - 0.5) * speed;
+            layer.style.transform = `translate(${x}px, ${y}px)`;
+          });
+        });
+
+        // Floating skill bubbles
+        const bubbleContainer = document.getElementById("bubble-container");
+        const skills = [
+          "Python", "C++", "Java", "C#", "Angular", "Spring", 
+          "LabVIEW", "PostgreSQL", "Linux", "Automation", "AI", "NLP",
+          "React", ".NET", "NLTK", "PLC", "Git", "Arduino"
+        ];
+
+        for (let i = 0; i < 18; i++) {
+          const bubble = document.createElement("div");
+          bubble.classList.add("bubble");
+          bubble.textContent = skills[Math.floor(Math.random() * skills.length)];
+          bubble.style.left = `${Math.random() * 100}%`;
+          bubble.style.animationDuration = `${10 + Math.random() * 10}s`;
+          bubble.style.animationDelay = `${Math.random() * 5}s`;
+          bubble.style.background = `hsl(${Math.random() * 60 + 170}, 70%, 60%)`;
+          bubbleContainer.appendChild(bubble);
+        }
+
+        // Intersection Observer for section reveals
+        const observer = new IntersectionObserver((entries) => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('visible');
+            }
+          });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('.section-reveal').forEach(el => observer.observe(el));
+
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+          anchor.addEventListener('click', function (e) {
+            e.preventDefault();
+            const target = document.querySelector(this.getAttribute('href'));
+            if (target) {
+              target.scrollIntoView({
+                behavior: 'smooth',
+                block: 'start'
+              });
+            }
+          });
+        });
+
+        // Console easter egg
+        console.log('%cStop looking at my code :(', 'font-size: 20px; color: #06b6d4; font-weight: bold;');
+        console.log('%cOkay then... Try this', 'font-size: 14px; color: #a855f7;');
+        console.log('%c1. Click my name 5 times', 'color: #06b6d4;');
+        console.log('%c3. Try the Konami Code (↑↑↓↓←→←→BA)', 'color: #06b6d4;');
+        console.log('%c4. Type "developer" anywhere on the page', 'color: #a855f7;');
+
+    }
+
+    // EASTER EGG 1: Click on name 5 times
+    let nameClicks = 0;
+    function easterEgg1() {
+      nameClicks++;
+      if (nameClicks === 5) {
+        document.body.classList.add('konami-active');
+        showSecretMode(translations[currentLang]["secret-mode-rainbow"]);
+        setTimeout(() => {
+          document.body.classList.remove('konami-active');
+          nameClicks = 0;
+        }, 5000);
+      }
+    }
+
+    // EASTER EGG 2: Click AI card - Matrix Mode
+    function activateMatrixMode() {
+      const canvas = document.getElementById('matrix-canvas');
+      const ctx = canvas.getContext('2d');
+      
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+      canvas.classList.add('active');
+      
+      const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789@#$%^&*()';
+      const fontSize = 14;
+      const columns = canvas.width / fontSize;
+      const drops = Array(Math.floor(columns)).fill(1);
+      
+      let matrixInterval = setInterval(() => {
+        ctx.fillStyle = 'rgba(0, 0, 0, 0.05)';
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+        
+        ctx.fillStyle = '#0F0';
+        ctx.font = fontSize + 'px monospace';
+        
+        for (let i = 0; i < drops.length; i++) {
+          const text = chars[Math.floor(Math.random() * chars.length)];
+          ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+          
+          if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
+            drops[i] = 0;
+          }
+          drops[i]++;
+        }
+      }, 33);
+      
+      setTimeout(() => {
+        clearInterval(matrixInterval);
+        canvas.classList.remove('active');
+      }, 8000);
+    }
+
+    // EASTER EGG 3: Konami Code
+    const konamiCode = ['ArrowUp', 'ArrowUp', 'ArrowDown', 'ArrowDown', 'ArrowLeft', 'ArrowRight', 'ArrowLeft', 'ArrowRight', 'b', 'a'];
+    let konamiIndex = 0;
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === konamiCode[konamiIndex]) {
+        konamiIndex++;
+        if (konamiIndex === konamiCode.length) {
+          activateParticleMode();
+          konamiIndex = 0;
+        }
+      } else {
+        konamiIndex = 0;
+      }
+    });
+
+    // --- NEW FUNCTION: Particle Mode ---
+    function activateParticleMode() {
+      // Play Hadouken Sound
+      const hadoukenSound = document.getElementById('hadouken-sound');
+      if (hadoukenSound) {
+        hadoukenSound.currentTime = 0; // Rewind to the start in case it's triggered again quickly
+        hadoukenSound.play().catch(e => console.error("Audio playback failed:", e));
+      }
+
+      showSecretMode(translations[currentLang]["secret-mode-particle-active"]);
+      
+      const maxParticles = 50;
+      let particleCount = 0;
+      let particleModeActive = true;
+      
+      // Function to create a single particle
+      const createParticle = (x, y) => {
+        if (!particleModeActive || particleCount >= maxParticles) return;
+        
+        const particle = document.createElement('div');
+        particle.classList.add('particle');
+        
+        // Random size and color
+        const size = Math.random() * 8 + 4; 
+        particle.style.width = `${size}px`;
+        particle.style.height = `${size}px`;
+        
+        // Particle color (cyan/purple gradient)
+        const isCyan = Math.random() > 0.5;
+        const color = isCyan ? '#06b6d4' : '#a855f7';
+        particle.style.background = color;
+        
+        // Start position
+        particle.style.left = `${x}px`;
+        particle.style.top = `${y}px`;
+        
+        // Random motion on creation
+        const translateX = (Math.random() - 0.5) * 100;
+        const translateY = (Math.random() - 0.5) * 100;
+        
+        // Set up the particle animation to move outwards and fade
+        particle.style.animation = `particle-float 1s ease-out forwards`;
+        particle.style.setProperty('--translate-x', `${translateX}px`);
+        particle.style.setProperty('--translate-y', `${translateY}px`);
+        
+        document.body.appendChild(particle);
+        particleCount++;
+        
+        // Clean up particle after animation
+        setTimeout(() => {
+          particle.remove();
+          particleCount--;
+        }, 1000);
+      };
+      
+      // Particle trail effect on mouse move
+      const mouseMoveHandler = (e) => {
+        // Create multiple particles on a successful code to make it an "explosion"
+        for(let i = 0; i < 2; i++) { // Adjusted to 2 for a slightly less intense trail
+          createParticle(e.clientX, e.clientY);
+        }
+      };
+
+      // Start the particle effect for a limited time (e.g., 5 seconds)
+      document.addEventListener('mousemove', mouseMoveHandler);
+      
+      setTimeout(() => {
+        particleModeActive = false;
+        document.removeEventListener('mousemove', mouseMoveHandler);
+        showSecretMode(translations[currentLang]["secret-mode-particle-deactive"]);
+      }, 10000); // Effect lasts for 10 seconds
+    }
+
+    // Show secret mode message
+    function showSecretMode(message) {
+      const secretMode = document.getElementById('secret-mode');
+      secretMode.textContent = message;
+      secretMode.classList.add('active');
+      
+      setTimeout(() => {
+        secretMode.classList.remove('active');
+      }, 3000);
+    }
+
+    // EASTER EGG 4: Type "developer" 
+    let typedSequence = '';
+    document.addEventListener('keypress', (e) => {
+      typedSequence += e.key;
+      if (typedSequence.includes('developer')) {
+        showSecretMode(translations[currentLang]["secret-mode-flipao"]);
+        typedSequence = '';
+        
+        document.querySelectorAll('.skill-badge').forEach(badge => {
+          badge.style.animation = 'glow-pulse 1s ease-in-out 3';
+          setTimeout(() => {
+            badge.style.animation = '';
+          }, 3000);
+        });
+      }
+      
+      if (typedSequence.length > 20) {
+        typedSequence = typedSequence.slice(-20);
+      }
+    });
+  </script>
+</body>
+</html>
