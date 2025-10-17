@@ -14,7 +14,6 @@ body {
     color: #fff;
     overflow-x: hidden;
     image-rendering: pixelated;
-    image-rendering: crisp-edges;
     word-wrap: break-word;
     overflow-wrap: anywhere;
 }
