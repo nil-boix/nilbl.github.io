@@ -433,17 +433,14 @@ body {
     height: 200px;
     cursor: pointer;
     transition: bottom 0.5s ease-in-out;
-    /* simpler, smoother */
     z-index: 1001;
     pointer-events: auto;
 }
 
 .hidden-mage:hover {
     bottom: 0;
-    /* smooth rise */
 }
 
-/* Prevent hover flicker by disabling pointer events on the dialogue and sprite */
 .mage-dialogue,
 .mage-placeholder,
 .mage-sprite {
@@ -462,40 +459,45 @@ body {
 .mage-dialogue {
     position: absolute;
     bottom: 100%;
-    left: 50%;
-    transform: translateX(-50%) scale(0);
+    /* sits above mage */
+    right: 0;
+    /* anchor to mage's right edge */
+    transform: translateY(-10%) scale(0);
     background: rgba(0, 0, 0, 0.95);
     border: 3px solid #8a2be2;
     padding: 1rem 1.5rem;
     border-radius: 8px;
     font-family: inherit;
-    /* keep the same site font */
     font-size: clamp(0.6rem, 1.5vw, 0.75rem);
     color: #fff;
-    white-space: nowrap;
-    /* <== important: prevent vertical text */
+    white-space: normal;
     margin-bottom: 10px;
     box-shadow: 0 0 20px rgba(138, 43, 226, 0.8);
     pointer-events: none;
     transition: transform 0.3s ease-in-out;
     line-height: 1.6;
-    max-width: 300px;
+    max-width: 260px;
+    word-wrap: break-word;
+    text-align: left;
+    z-index: 1002;
 }
-
 
 .mage-dialogue.active {
-    transform: translateX(-50%) scale(1);
+    transform: translateY(-10%) scale(1);
 }
 
+/* speech bubble tip centered on top of mage */
 .mage-dialogue::after {
     content: '';
     position: absolute;
     top: 100%;
-    left: 50%;
-    transform: translateX(-50%);
+    right: 15px;
+    /* arrow sits just above mage center */
     border: 10px solid transparent;
     border-top-color: #8a2be2;
 }
+
+
 
 .mage-placeholder {
     width: 100%;
@@ -622,4 +624,9 @@ body {
     font-size: clamp(0.6rem, 1.8vw, 0.8rem);
     color: #87ceeb;
     text-align: center;
+}
+
+/* === HIDE MAGE DURING LOADING === */
+#loadingScreen.active~.hidden-mage {
+    display: none;
 }

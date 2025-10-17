@@ -27,8 +27,10 @@ function startGame() {
         "READY!"
     ];
 
-    // Show loading screen
+    // Show loading screen and hide mage
     loadingScreen.classList.add('active');
+    document.querySelector('.hidden-mage').style.display = 'none';
+
     let progress = 0;
     let nextMessageIndex = 0;
     let nextThreshold = 100 / (messages.length - 1);
@@ -53,6 +55,7 @@ function startGame() {
                 titleScreen.style.opacity = '0';
                 setTimeout(() => {
                     titleScreen.style.display = 'none';
+                    document.querySelector('.hidden-mage').style.display = 'block'; // show mage only now
                     characterMenu.classList.add('active');
                     characterMenu.style.opacity = '0';
                     setTimeout(() => {
@@ -64,6 +67,7 @@ function startGame() {
         }
     }, 200);
 }
+
 
 function toggleMenu(element) {
     playSound('menu');
@@ -143,21 +147,16 @@ document.addEventListener('keydown', function(event) {
 
 // === HIDDEN MAGE FUNCTIONALITY ===
 const mageDialogues = [
-    "Psst... looking for a job? 👀",
-    "I've been watching your code... not bad!",
-    "Need a wizard for your team? 🧙‍♂️",
-    "I can cast JavaScript spells!",
-    "My debugging magic is legendary! ✨",
-    "Hire me and I'll make bugs disappear!",
-    "I've mastered the ancient art of Git!",
-    "Your project needs more magic! ✨",
-    "I bring +10 to code quality!",
-    "Coffee in, code out. Simple spell! ☕",
-    "Stack Overflow? I AM the overflow!",
-    "Trust me, I'm a wizard! 🪄",
-    "My code is 99% bug-free... mostly!",
-    "Python? Java? I speak all tongues!",
-    "I can make your deadlines disappear! ⏰"
+    "Nil's favourite series is ANDOR. 'Revolution is not for the sane!'",
+    "Nil loves building LEGO... until he steps on one.",
+    "Nil loves cats but is allergic. His life is basically Schrödinger's nightmare.",
+    "He can cast JavaScript spells!",
+    "He masters the art of debugging... which is just shouting: WHY?!",
+    "He's favourite animal are dogs! :)",
+    "He plays a lot of videogames, like A LOT!",
+    "He loves going to the gym.",
+    "Do or do not. There is no try.",
+    ""
 ];
 
 let lastDialogueIndex = -1;
@@ -191,4 +190,8 @@ document.addEventListener('DOMContentLoaded', function() {
     if (mage) {
         mage.addEventListener('click', showMageDialogue);
     }
+});
+
+document.addEventListener('DOMContentLoaded', () => {
+    document.querySelector('.hidden-mage').style.display = 'none';
 });
