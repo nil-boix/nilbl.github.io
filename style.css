@@ -432,13 +432,24 @@ body {
     width: 120px;
     height: 200px;
     cursor: pointer;
-    transition: bottom 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    transition: bottom 0.5s ease-in-out;
+    /* simpler, smoother */
     z-index: 1001;
+    pointer-events: auto;
 }
 
 .hidden-mage:hover {
-    bottom: 0px;
+    bottom: 0;
+    /* smooth rise */
 }
+
+/* Prevent hover flicker by disabling pointer events on the dialogue and sprite */
+.mage-dialogue,
+.mage-placeholder,
+.mage-sprite {
+    pointer-events: none;
+}
+
 
 .mage-sprite {
     width: 100%;
@@ -457,17 +468,20 @@ body {
     border: 3px solid #8a2be2;
     padding: 1rem 1.5rem;
     border-radius: 8px;
+    font-family: inherit;
+    /* keep the same site font */
     font-size: clamp(0.6rem, 1.5vw, 0.75rem);
     color: #fff;
     white-space: nowrap;
+    /* <== important: prevent vertical text */
     margin-bottom: 10px;
     box-shadow: 0 0 20px rgba(138, 43, 226, 0.8);
     pointer-events: none;
-    transition: transform 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    transition: transform 0.3s ease-in-out;
     line-height: 1.6;
     max-width: 300px;
-    white-space: normal;
 }
+
 
 .mage-dialogue.active {
     transform: translateX(-50%) scale(1);
