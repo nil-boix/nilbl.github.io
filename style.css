@@ -674,3 +674,18 @@ body {
 #loadingScreen.active~.hidden-mage {
     display: none;
 }
+
+.more-info-link {
+    display: inline-block;
+    margin-top: 0.5rem;
+    color: #87ceeb;
+    font-size: 0.7rem;
+    text-decoration: underline;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.more-info-link:hover {
+    color: #ffd700;
+    transform: scale(1.05);
+}

@@ -202,6 +202,15 @@ function showMageDialogue() {
     typeNextLetter();
 }
 
+
+document.querySelectorAll('.more-info-link').forEach(link => {
+    link.addEventListener('click', function() {
+        playSound('menu');
+        switchSection('missions');
+    });
+});
+
+
 document.addEventListener('DOMContentLoaded', function() {
     const mage = document.querySelector('.hidden-mage');
     if (mage) {
