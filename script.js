@@ -147,14 +147,13 @@ document.addEventListener('keydown', function(event) {
 
 // === HIDDEN MAGE FUNCTIONALITY ===
 const mageDialogues = [
-    "Nil's favourite series is ANDOR. 'Revolution is not for the sane!'",
-    "Nil loves building LEGO... until he steps on one.",
-    "Nil loves cats but is allergic. His life is basically Schrödinger's nightmare.",
-    "He can cast JavaScript spells!",
-    "He masters the art of debugging... which is just shouting: WHY?!",
-    "He's favourite animal are dogs! :)",
-    "He plays a lot of videogames, like A LOT!",
-    "He loves going to the gym.",
+    "My favourite series is ANDOR. 'Revolution is not for the sane!'",
+    "I love building LEGO... not the paying part tho.",
+    "I love cats but I'm allergic to them. My life is basically Schrödinger's nightmare.",
+    "I can cast JavaScript spells!",
+    "I master the art of debugging... which is just shouting: WHY?!",
+    "Favourite animal: dogs!",
+    "I play a lot of videogames, like A LOT!",
     "Do or do not. There is no try.",
     ""
 ];

@@ -424,6 +424,33 @@ body {
     color: #888;
 }
 
+/* === TECHNOLOGIES USED === */
+.tech-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-top: 1rem;
+}
+
+.tech-item {
+    background: rgba(255, 215, 0, 0.1);
+    border: 2px solid #ffd700;
+    color: #ffd700;
+    padding: 0.3rem 0.6rem;
+    border-radius: 4px;
+    font-size: clamp(0.6rem, 1.5vw, 0.7rem);
+    text-shadow: 1px 1px 0px #000;
+    transition: all 0.2s;
+    cursor: default;
+}
+
+.tech-item:hover {
+    background: rgba(255, 215, 0, 0.3);
+    transform: scale(1.1);
+    box-shadow: 0 0 8px #ffd700;
+}
+
+
 /* === HIDDEN MAGE === */
 .hidden-mage {
     position: fixed;
@@ -550,6 +577,31 @@ body {
     image-rendering: pixelated;
     animation: idleBreath 4s ease-in-out infinite;
 }
+
+/* === ENTRY ICONS === */
+.entry-title {
+    color: #ffd700;
+    font-size: 1em;
+    margin-bottom: 0.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+}
+
+.entry-icon {
+    width: 20px;
+    height: 20px;
+    image-rendering: pixelated;
+    filter: drop-shadow(0 0 5px rgba(255, 215, 0, 0.4));
+    flex-shrink: 0;
+}
+
+.entry-title:hover .entry-icon {
+    transform: scale(1.1);
+    filter: drop-shadow(0 0 10px #ffd700);
+    transition: transform 0.2s ease, filter 0.2s ease;
+}
+
 
 /* FIXED: More subtle breathing effect */
 @keyframes idleBreath {
