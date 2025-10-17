@@ -166,7 +166,7 @@ function showMageDialogue() {
 
     const dialogue = document.querySelector('.mage-dialogue');
 
-    if (mageTypingInterval) clearInterval(mageTypingInterval);
+    if (mageTypingInterval) clearTimeout(mageTypingInterval); // changed to clearTimeout
     if (hideTimeout) clearTimeout(hideTimeout);
 
     let randomIndex;
@@ -181,23 +181,26 @@ function showMageDialogue() {
     dialogue.classList.add('active');
 
     let i = 0;
-    const speed = 40;
 
-    mageTypingInterval = setInterval(() => {
+    function typeNextLetter() {
         dialogue.textContent += fullText.charAt(i);
         i++;
-        if (i >= fullText.length) {
-            clearInterval(mageTypingInterval);
-            mageTypingInterval = null;
 
+        if (i < fullText.length) {
+            // Random delay between 30ms and 80ms
+            const randomSpeed = Math.floor(Math.random() * 75) + 30;
+            mageTypingInterval = setTimeout(typeNextLetter, randomSpeed);
+        } else {
+            mageTypingInterval = null;
             hideTimeout = setTimeout(() => {
                 dialogue.classList.remove('active');
                 hideTimeout = null;
             }, 2000);
         }
-    }, speed);
-}
+    }
 
+    typeNextLetter();
+}
 
 document.addEventListener('DOMContentLoaded', function() {
     const mage = document.querySelector('.hidden-mage');
