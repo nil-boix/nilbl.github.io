@@ -215,7 +215,6 @@ body {
     gap: 1.2rem;
 }
 
-/* FIXED: Removed border and background from portrait frame */
 .portrait-frame {
     width: 100%;
     display: flex;
@@ -486,9 +485,7 @@ body {
 .mage-dialogue {
     position: absolute;
     bottom: 100%;
-    /* sits above mage */
     right: 0;
-    /* anchor to mage's right edge */
     transform: translateY(-10%) scale(0);
     background: rgba(0, 0, 0, 0.95);
     border: 3px solid #8a2be2;
@@ -513,17 +510,15 @@ body {
     transform: translateY(-10%) scale(1);
 }
 
-/* speech bubble tip centered on top of mage */
+
 .mage-dialogue::after {
     content: '';
     position: absolute;
     top: 100%;
     right: 15px;
-    /* arrow sits just above mage center */
     border: 10px solid transparent;
     border-top-color: #8a2be2;
 }
-
 
 
 .mage-placeholder {
@@ -568,7 +563,6 @@ body {
     }
 }
 
-/* FIXED: Made sprite bigger and added subtle breathing animation */
 .portrait-sprite {
     width: 100%;
     max-width: 350px;
