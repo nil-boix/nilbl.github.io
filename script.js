@@ -154,36 +154,51 @@ const mageDialogues = [
     "I master the art of debugging... which is just shouting: WHY?!",
     "Favourite animal: dogs!",
     "I play a lot of videogames, like A LOT!",
-    "Do or do not. There is no try.",
-    ""
+    "Do or do not. There is no try."
 ];
 
 let lastDialogueIndex = -1;
+let mageTypingInterval = null;
+let hideTimeout = null;
 
 function showMageDialogue() {
     playSound('menu');
 
     const dialogue = document.querySelector('.mage-dialogue');
 
-    // Get a random dialogue different from the last one
+    if (mageTypingInterval) clearInterval(mageTypingInterval);
+    if (hideTimeout) clearTimeout(hideTimeout);
+
     let randomIndex;
     do {
         randomIndex = Math.floor(Math.random() * mageDialogues.length);
     } while (randomIndex === lastDialogueIndex && mageDialogues.length > 1);
 
     lastDialogueIndex = randomIndex;
-    dialogue.textContent = mageDialogues[randomIndex];
+    const fullText = mageDialogues[randomIndex];
 
-    // Show dialogue
+    dialogue.textContent = '';
     dialogue.classList.add('active');
 
-    // Hide after 3 seconds
-    setTimeout(() => {
-        dialogue.classList.remove('active');
-    }, 3000);
+    let i = 0;
+    const speed = 40;
+
+    mageTypingInterval = setInterval(() => {
+        dialogue.textContent += fullText.charAt(i);
+        i++;
+        if (i >= fullText.length) {
+            clearInterval(mageTypingInterval);
+            mageTypingInterval = null;
+
+            hideTimeout = setTimeout(() => {
+                dialogue.classList.remove('active');
+                hideTimeout = null;
+            }, 2000);
+        }
+    }, speed);
 }
 
-// Add click event listener to mage when DOM is loaded
+
 document.addEventListener('DOMContentLoaded', function() {
     const mage = document.querySelector('.hidden-mage');
     if (mage) {

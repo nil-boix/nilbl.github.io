@@ -603,7 +603,6 @@ body {
 }
 
 
-/* FIXED: More subtle breathing effect */
 @keyframes idleBreath {
 
     0%,
@@ -616,7 +615,6 @@ body {
     }
 }
 
-/* FIXED: Loading screen - properly centered and visible */
 #loadingScreen {
     position: fixed;
     inset: 0;
