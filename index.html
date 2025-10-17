@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,7 +8,9 @@
     <meta name="description" content="Retro-style interactive portfolio of Nil Boix, ICT Systems Engineer and Software Developer.">
     <link rel="stylesheet" href="style.css">
     <link rel="icon" href="assets/favicon.png" type="image/png">
+
 </head>
+
 <body>
     <div class="game-container">
         <!-- === TITLE SCREEN === -->
@@ -25,15 +28,15 @@
             <nav class="taskbar">
                 <div class="taskbar-container">
                     <div class="taskbar-item active" onclick="switchSection('stats')">
-                        <span class="taskbar-icon">⚔️</span>
+                        <img src="assets/sword.png" alt="Stats Icon" class="taskbar-icon">
                         <span>MY STATS</span>
                     </div>
                     <div class="taskbar-item" onclick="switchSection('missions')">
-                        <span class="taskbar-icon">📜</span>
+                        <img src="assets/scrollopen.png" alt="Stats Icon" class="taskbar-icon">
                         <span>MISSIONS ACCOMPLISHED</span>
                     </div>
                     <div class="taskbar-item" onclick="switchSection('contact')">
-                        <span class="taskbar-icon">✉️</span>
+                        <img src="assets/scrollclosedred.png" alt="Stats Icon" class="taskbar-icon">
                         <span>SEND RAVEN</span>
                     </div>
                 </div>
@@ -45,10 +48,7 @@
                     <!-- Left: Character Portrait -->
                     <div class="character-portrait">
                         <div class="portrait-frame">
-                            <img 
-                                src="assets/hero-idle.gif" 
-                                alt="Nil Boix pixel art hero idle animation" 
-                                class="portrait-sprite">
+                            <img src="assets/portrait.png" alt="Nil Boix pixel art hero idle animation" class="portrait-sprite">
                         </div>
                         <h2 class="hero-name">NIL BOIX</h2>
                         <p class="hero-title">ICT SYSTEMS ENGINEER<br>SOFTWARE DEVELOPER</p>
@@ -56,7 +56,11 @@
 
                     <!-- Right: Stats Menu -->
                     <div class="stats-info">
-                        <h2 class="menu-header">⚔️ CHARACTER STATS ⚔️</h2>
+                        <h2 class="menu-header">
+                            <img src="assets/swordbig.png" alt="Left Sword" class="header-icon">
+                            <span>CHARACTER STATS</span>
+                            <img src="assets/swordbig.png" alt="Right Sword" class="header-icon">
+                        </h2>
                         <span class="info-box">Education & Professional Experience</span>
 
                         <div class="menu-panel">
@@ -64,7 +68,8 @@
                             <div class="menu-item" onclick="toggleMenu(this)">
                                 <div class="menu-item-header">
                                     <div class="menu-item-title">
-                                        <span class="menu-icon">🎓</span>
+                                        <img src="assets/hat.png" alt="Education" class="menu-icon">
+
                                         <span>EDUCATION</span>
                                     </div>
                                     <span class="menu-arrow">▶</span>
@@ -87,7 +92,7 @@
                             <div class="menu-item" onclick="toggleMenu(this)">
                                 <div class="menu-item-header">
                                     <div class="menu-item-title">
-                                        <span class="menu-icon">💼</span>
+                                        <img src="assets/hammer.png" alt="Experience" class="menu-icon">
                                         <span>EXPERIENCE</span>
                                     </div>
                                     <span class="menu-arrow">▶</span>
@@ -116,7 +121,8 @@
                             <div class="menu-item" onclick="toggleMenu(this)">
                                 <div class="menu-item-header">
                                     <div class="menu-item-title">
-                                        <span class="menu-icon">🌟</span>
+                                        <img src="assets/star.png" alt="Experience" class="menu-icon">
+
                                         <span>OTHER EXPERIENCE</span>
                                     </div>
                                     <span class="menu-arrow">▶</span>
@@ -147,7 +153,7 @@
                             <div class="menu-item" onclick="toggleMenu(this)">
                                 <div class="menu-item-header">
                                     <div class="menu-item-title">
-                                        <span class="menu-icon">⚙️</span>
+                                        <img src="assets/wheel.png" alt="Experience" class="menu-icon">
                                         <span>SKILLS & TOOLS</span>
                                     </div>
                                     <span class="menu-arrow">▶</span>
@@ -166,7 +172,7 @@
                                                 <div class="skill-item">Erlang</div>
                                                 <div class="skill-item">Assembly</div>
                                             </div>
-                                        
+
                                             <div class="skill-category">
                                                 <div class="skill-category-title">FRAMEWORKS & LIBRARIES</div>
                                                 <div class="skill-item">Spring Boot</div>
@@ -176,7 +182,7 @@
                                                 <div class="skill-item">Pandas</div>
                                                 <div class="skill-item">NumPy</div>
                                             </div>
-                                        
+
                                             <div class="skill-category">
                                                 <div class="skill-category-title">WEB TECHNOLOGIES</div>
                                                 <div class="skill-item">HTML5</div>
@@ -184,12 +190,12 @@
                                                 <div class="skill-item">JSON</div>
                                                 <div class="skill-item">HTTP</div>
                                             </div>
-                                        
+
                                             <div class="skill-category">
                                                 <div class="skill-category-title">DATABASES</div>
                                                 <div class="skill-item">PostgreSQL</div>
                                             </div>
-                                        
+
                                             <div class="skill-category">
                                                 <div class="skill-category-title">TOOLS & SYSTEMS</div>
                                                 <div class="skill-item">Git</div>
@@ -214,24 +220,25 @@
                 <div class="menu-container">
                     <div class="character-portrait">
                         <div class="portrait-frame">
-                            <img 
-                                src="assets/quest-book.gif" 
-                                alt="Quest log pixel art animation"
-                                class="portrait-sprite">
+                            <img src="assets/slayed.gif" alt="Slaying log pixel art animation" class="portrait-sprite">
                         </div>
                         <h2 class="hero-name">MISSIONS LOG</h2>
                         <p class="hero-title">COMPLETED QUESTS<br>& CONQUERED BEASTS</p>
                     </div>
 
                     <div class="stats-info">
-                        <h2 class="menu-header">📜 MISSIONS ACCOMPLISHED 📜</h2>
+                        <h2 class="menu-header">
+                            <img src="assets/scrollopen.png" alt="Left Scroll" class="header-icon">
+                            <span>MISSIONS ACCOMPLISHED</span>
+                            <img src="assets/scrollopen.png" alt="Right Scroll" class="header-icon">
+                        </h2>
                         <span class="info-box">Projects & Achievements</span>
                         <div class="menu-panel">
                             <div class="menu-content-inner">
                                 <div class="content-entry">
-                                    <div class="entry-title">🏆 PROJECT PLACEHOLDER 1</div>
-                                    <div class="entry-subtitle">Epic Quest Type</div>
-                                    <div class="entry-date">YEAR</div>
+                                    <div class="entry-title">🏆 Internal Excel & NLP Automation Tool</div>
+                                    <div class="entry-subtitle">Made a process 75% quicker and error-free</div>
+                                    <div class="entry-date">2024</div>
                                     <div class="entry-description">
                                         Description of your amazing project goes here. What did you build? What technologies did you use? What problems did you solve?
                                     </div>
@@ -263,17 +270,18 @@
                 <div class="menu-container">
                     <div class="character-portrait">
                         <div class="portrait-frame">
-                            <img 
-                                src="assets/raven.gif" 
-                                alt="Pixel raven messenger animation" 
-                                class="portrait-sprite">
+                            <img src="assets/pigeon.gif" alt="Pigeon.png" class="portrait-sprite">
                         </div>
-                        <h2 class="hero-name">SEND RAVEN</h2>
+                        <h2 class="hero-name">SEND CARRIER PIGEON</h2>
                         <p class="hero-title">SUMMON THE HERO<br>TO YOUR QUEST</p>
                     </div>
 
                     <div class="stats-info">
-                        <h2 class="menu-header">CONTACT</h2>
+                        <h2 class="menu-header">
+                            <img src="assets/pigeon.png" alt="Left Pigeon" class="header-icon">
+                            <span>CONTACT</span>
+                            <img src="assets/pigeon.png" alt="Right Pigeon" class="header-icon">
+                        </h2>
                         <span class="info-box">Contact Details</span>
                         <div class="menu-panel">
                             <div class="menu-content-inner">
@@ -307,19 +315,31 @@
         </div>
     </div>
 
+    <!-- === HIDDEN MAGE === -->
+    <div class="hidden-mage">
+        <div class="mage-dialogue"></div>
+        <!-- Placeholder for mage sprite - replace with your actual mage image -->
+        <div class="mage-placeholder">🧙‍♂️</div>
+        <!-- When you have the image, replace the placeholder div above with: -->
+        <!-- <img src="assets/mage.gif" alt="Hidden mage" class="mage-sprite"> -->
+    </div>
+
+    <script src="script.js"></script>
+
     <script src="script.js"></script>
 
     <!-- === FAKE LOADING SCREEN === -->
     <div id="loadingScreen">
         <div class="loading-box">
-        <p class="loading-text">WAKING UP...</p>
-        <div class="loading-bar">
-            <div class="loading-fill" id="loadingFill"></div>
-        </div>
-        <p class="loading-percent" id="loadingPercent">0%</p>
+            <p class="loading-text">WAKING UP...</p>
+            <div class="loading-bar">
+                <div class="loading-fill" id="loadingFill"></div>
+            </div>
+            <p class="loading-percent" id="loadingPercent">0%</p>
         </div>
     </div>
-  
+
 
 </body>
+
 </html>
