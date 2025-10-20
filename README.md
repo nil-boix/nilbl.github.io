@@ -19,15 +19,11 @@ PROJECT STRUCTURE
 =================
 
 .
-├── index.html              # The main control center
-├── style.css               # Where the visual magic happens
-├── script.js               # Handles sounds, transitions, and interactivity
+├── index.html
+├── style.css
+├── script.js
 ├── assets/
-│   ├── icons/              # Shiny little symbols
-│   ├── sounds/             # Button clicks and transition blips
-│   ├── images/             # Backgrounds, logos, etc.
-│   └── thunder.png         # Icon of choice for thunderous projects
-└── README.txt              # This file, obviously
+└── README.txt
 
 ---
 
