@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Visitor Map - Privacy Compliant</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background: #1a1a1a;
+            color: #fff;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        h1 {
+            text-align: center;
+            color: #4CAF50;
+        }
+        .privacy-notice {
+            background: #2a2a2a;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            border-left: 4px solid #4CAF50;
+        }
+        .privacy-notice h3 {
+            margin-top: 0;
+            color: #4CAF50;
+        }
+        .privacy-notice ul {
+            margin: 10px 0;
+            padding-left: 20px;
+        }
+        #map {
+            height: 600px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+        }
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-top: 20px;
+        }
+        .stat-card {
+            background: #2a2a2a;
+            padding: 20px;
+            border-radius: 8px;
+            text-align: center;
+        }
+        .stat-card h3 {
+            margin: 0;
+            color: #4CAF50;
+            font-size: 2em;
+        }
+        .stat-card p {
+            margin: 5px 0 0 0;
+            color: #aaa;
+        }
+        .back-link {
+            display: inline-block;
+            margin-bottom: 20px;
+            color: #4CAF50;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        .back-link:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="index.html" class="back-link">← Back to Portfolio</a>
+
+        <h1>Visitor Map</h1>
+
+        <div class="privacy-notice">
+            <h3>🔒 Privacy First</h3>
+            <p><strong>Your privacy is protected. This map:</strong></p>
+            <ul>
+                <li>❌ Does NOT store IP addresses</li>
+                <li>❌ Does NOT track exact GPS coordinates</li>
+                <li>❌ Does NOT use cookies or tracking pixels</li>
+                <li>✅ Shows only approximate city-level location</li>
+                <li>✅ Stores only: country, city name, and timestamp</li>
+                <li>✅ All data is anonymous and aggregated</li>
+            </ul>
+            <p><em>GDPR & CCPA compliant by design.</em></p>
+        </div>
+
+        <div id="map"></div>
+
+        <div class="stats">
+            <div class="stat-card">
+                <h3 id="total-visitors">0</h3>
+                <p>Total Visitors</p>
+            </div>
+            <div class="stat-card">
+                <h3 id="countries-count">0</h3>
+                <p>Countries</p>
+            </div>
+            <div class="stat-card">
+                <h3 id="cities-count">0</h3>
+                <p>Cities</p>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script src="visitor-map.js"></script>
+</body>
+</html>
