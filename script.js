@@ -102,6 +102,9 @@ function switchSection(section) {
     } else if (section === 'contact') {
         document.getElementById('contactSection').classList.add('active');
         document.querySelectorAll('.taskbar-item')[2].classList.add('active');
+    } else if (section === 'visitormap') {
+        document.getElementById('visitormapSection').classList.add('active');
+        document.querySelectorAll('.taskbar-item')[3].classList.add('active');
     }
 
     window.scrollTo({

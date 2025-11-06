@@ -39,6 +39,10 @@
                         <img src="assets/scrollclosedred.png" alt="scroll closed" class="taskbar-icon">
                         <span>SEND RAVEN</span>
                     </div>
+                    <div class="taskbar-item" onclick="switchSection('visitormap')">
+                        <img src="assets/star.png" alt="map" class="taskbar-icon">
+                        <span>VISITOR MAP</span>
+                    </div>
                 </div>
             </nav>
 
@@ -367,6 +371,104 @@
                 </div>
             </section>
 
+            <!-- === VISITOR MAP SECTION === -->
+            <section class="content-section" id="visitormapSection">
+                <div class="menu-container">
+                    <div class="character-portrait">
+                        <div class="portrait-frame">
+                            <img src="assets/star.png" alt="World Map" class="portrait-sprite">
+                        </div>
+                        <h2 class="hero-name">VISITOR MAP</h2>
+                        <p class="hero-title">TRACKING HEROES<br>FROM ACROSS THE LAND</p>
+                    </div>
+
+                    <div class="stats-info">
+                        <h2 class="menu-header">
+                            <img src="assets/star.png" alt="Left Map" class="header-icon">
+                            <span>WORLD VISITORS</span>
+                            <img src="assets/star.png" alt="Right Map" class="header-icon">
+                        </h2>
+                        <span class="info-box">Privacy-First Visitor Tracking</span>
+
+                        <!-- Privacy Mode Selector -->
+                        <div class="privacy-mode-selector">
+                            <div class="mode-title">TRACKING MODE:</div>
+                            <select id="privacyModeSelect" class="mode-dropdown" onchange="VisitorMap.changeMode(this.value)">
+                                <option value="country">Country-Level Only (Recommended)</option>
+                                <option value="fuzzy">Fuzzy Coordinates (±100km)</option>
+                                <option value="ephemeral">Ephemeral (No Storage)</option>
+                                <option value="disabled">Tracking Disabled</option>
+                            </select>
+                            <div class="mode-description" id="modeDescription">
+                                Only country codes are collected. No IP addresses or precise locations stored.
+                            </div>
+                        </div>
+
+                        <div class="menu-panel">
+                            <div class="menu-content-inner">
+
+                                <!-- Visitor Statistics -->
+                                <div class="visitor-stats">
+                                    <div class="stat-item">
+                                        <div class="stat-icon">🌍</div>
+                                        <div class="stat-content">
+                                            <div class="stat-label">TOTAL VISITORS</div>
+                                            <div class="stat-value" id="totalVisitors">0</div>
+                                        </div>
+                                    </div>
+                                    <div class="stat-item">
+                                        <div class="stat-icon">🗺️</div>
+                                        <div class="stat-content">
+                                            <div class="stat-label">COUNTRIES VISITED</div>
+                                            <div class="stat-value" id="uniqueCountries">0</div>
+                                        </div>
+                                    </div>
+                                    <div class="stat-item">
+                                        <div class="stat-icon">👤</div>
+                                        <div class="stat-content">
+                                            <div class="stat-label">YOUR LOCATION</div>
+                                            <div class="stat-value" id="userLocation">Unknown</div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Map Container -->
+                                <div class="map-container">
+                                    <div id="worldMap" class="world-map">
+                                        <!-- SVG map will be inserted here -->
+                                    </div>
+                                </div>
+
+                                <!-- Country List -->
+                                <div class="country-list-container">
+                                    <div class="country-list-title">VISITOR BREAKDOWN BY COUNTRY</div>
+                                    <div id="countryList" class="country-list">
+                                        <!-- Country items will be dynamically added -->
+                                    </div>
+                                </div>
+
+                                <!-- Privacy Notice -->
+                                <div class="privacy-notice">
+                                    <div class="privacy-notice-title">🔒 PRIVACY COMMITMENT</div>
+                                    <div class="privacy-notice-content">
+                                        This visitor map is designed with privacy in mind:
+                                        <ul>
+                                            <li>No IP addresses are stored</li>
+                                            <li>No precise GPS coordinates collected</li>
+                                            <li>Data is aggregated and anonymized</li>
+                                            <li>You can disable tracking at any time</li>
+                                            <li>Uses localStorage for demo (no server tracking)</li>
+                                        </ul>
+                                        Your privacy mode: <strong id="currentPrivacyMode">Country-Level Only</strong>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
 
             <!-- === FOOTER === -->
             <footer class="footer-info">
@@ -385,8 +487,22 @@
     </div>
 
     <script src="script.js"></script>
+    <script src="visitor-map.js"></script>
 
-    <script src="script.js"></script>
+    <!-- === COOKIE CONSENT BANNER === -->
+    <div id="cookieConsent" class="cookie-consent">
+        <div class="cookie-content">
+            <div class="cookie-icon">🍪</div>
+            <div class="cookie-text">
+                <strong>Cookie & Privacy Notice</strong>
+                <p>This site uses localStorage to track visitor statistics in a privacy-friendly way. No personal data, IPs, or precise locations are stored. You can disable tracking in the Visitor Map section.</p>
+            </div>
+            <div class="cookie-actions">
+                <button onclick="VisitorMap.acceptCookies()" class="cookie-btn accept">Accept</button>
+                <button onclick="VisitorMap.rejectCookies()" class="cookie-btn reject">Decline</button>
+            </div>
+        </div>
+    </div>
 
     <!-- === FAKE LOADING SCREEN === -->
     <div id="loadingScreen">
